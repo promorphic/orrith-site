@@ -1,11 +1,11 @@
 // Indicative rates (placeholder numbers)
 const RATES = {
-  USD: { INR: 83.42, MXN: 17.08, PHP: 56.21, NGN: 1542.5, BRL: 5.02, KES: 129.4 },
-  EUR: { INR: 90.11, MXN: 18.45, PHP: 60.72, NGN: 1666.3, BRL: 5.42, KES: 139.8 },
-  GBP: { INR: 105.37, MXN: 21.57, PHP: 71.0, NGN: 1948.2, BRL: 6.34, KES: 163.4 },
+  USD: { EUR: 0.9223, INR: 83.42, MXN: 17.08, PHP: 56.21, NGN: 1542.5, BRL: 5.02, KES: 129.4 },
+  EUR: { EUR: 1, INR: 90.11, MXN: 18.45, PHP: 60.72, NGN: 1666.3, BRL: 5.42, KES: 139.8 },
+  GBP: { EUR: 1.169, INR: 105.37, MXN: 21.57, PHP: 71.0, NGN: 1948.2, BRL: 6.34, KES: 163.4 },
 };
 const SYMBOL = { USD: '$', EUR: '€', GBP: '£' };
-const ETA = { INR: '~3 minutes', MXN: '~2 minutes', PHP: '~3 minutes', NGN: '~6 minutes', BRL: '~4 minutes', KES: '~5 minutes' };
+const ETA = { EUR: '~2 minutes', INR: '~3 minutes', MXN: '~2 minutes', PHP: '~3 minutes', NGN: '~6 minutes', BRL: '~4 minutes', KES: '~5 minutes' };
 const FEE = 0.0025;       // Orrith fee
 const BANK_COST = 0.0438; // typical wire fee + FX markup, for "you save"
 
@@ -22,7 +22,7 @@ function updateQuote() {
   const sym = SYMBOL[from];
 
   $('feeOut').textContent = sym + fmt(fee);
-  $('rateOut').textContent = `1 ${from} = ${fmt(rate)} ${to}`;
+  $('rateOut').textContent = `1 ${from} = ${fmt(rate, rate < 10 ? 4 : 2)} ${to}`;
   $('receiveAmount').value = fmt(received);
   $('etaOut').textContent = ETA[to];
   $('saveOut').textContent = sym + fmt(amount * (BANK_COST - FEE));
