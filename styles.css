@@ -201,13 +201,6 @@ pre { padding: 24px; overflow-x: auto; font: .82rem/1.75 var(--mono); color: #CF
 .marquee span { font-family: var(--mono); letter-spacing: .18em; color: var(--muted); font-size: .85rem; }
 .marquee i { font-style: normal; color: var(--gold); font-size: .6rem; }
 
-/* Testimonials */
-figure.cell { display: flex; flex-direction: column; justify-content: space-between; gap: 32px; }
-blockquote { font-family: var(--display); font-style: italic; font-size: 1.35rem; line-height: 1.45; color: var(--text); }
-figcaption { display: flex; flex-direction: column; border-top: 1px solid var(--line); padding-top: 18px; }
-figcaption strong { font-weight: 500; }
-figcaption span { font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
-
 /* Security feature box */
 .feature-box { border: 1px solid var(--line-gold); background: linear-gradient(180deg, rgba(196, 162, 100, .05), transparent 60%), var(--panel); padding: 64px 56px; }
 .badges { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 44px; }
