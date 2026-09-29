@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orrith — Cross-border payments on stablecoin rails</title>
+  <meta name="description" content="Orrith moves money across borders in minutes using regulated stablecoins. Lower FX costs, 24/7 settlement, one API." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Ticker -->
+  <div class="ticker" aria-label="Indicative FX rates">
+    <div class="ticker-track">
+      <div class="ticker-set">
+        <span>USD/INR <b>83.42</b> <i class="up">+0.12%</i></span>
+        <span>USD/MXN <b>17.08</b> <i class="down">−0.31%</i></span>
+        <span>EUR/USD <b>1.0842</b> <i class="up">+0.08%</i></span>
+        <span>USDC/USD <b>1.0000</b> <i>0.00%</i></span>
+        <span>GBP/NGN <b>1,948.20</b> <i class="up">+0.44%</i></span>
+        <span>USD/PHP <b>56.21</b> <i class="down">−0.05%</i></span>
+        <span>EUR/BRL <b>5.42</b> <i class="up">+0.21%</i></span>
+        <span>USD/KES <b>129.40</b> <i class="down">−0.18%</i></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <header class="nav" id="top">
+    <div class="container nav-inner">
+      <a href="#top" class="logo">
+        <img src="assets/favicon.svg" alt="" width="26" height="26" />
+        <span class="logo-word">ORRITH</span>
+        <span class="logo-tag">PAY</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#how">How it works</a>
+        <a href="#products">Products</a>
+        <a href="#corridors">Corridors</a>
+        <a href="#developers">Developers</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-gold"><span class="plus">+</span> Get started</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow"><span class="diamond">◆</span> Stablecoin settlement · 42 countries</span>
+        <h1>Borderless Payments.<br /><em>Settled in Minutes.</em></h1>
+        <p class="lead">Orrith uses regulated stablecoins to move money internationally around the clock — transparent FX, a fraction of the cost, and one API for payouts in 60+ currencies.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-gold btn-lg"><span class="plus">+</span> Open an account</a>
+          <a href="#developers" class="btn btn-line btn-lg">API documentation</a>
+        </div>
+
+        <div class="stats">
+          <div>
+            <span class="label">Annualized volume</span>
+            <strong>$18.4B</strong>
+            <span class="delta up">+34.2% YoY</span>
+          </div>
+          <div>
+            <span class="label">Median settlement</span>
+            <strong>3m 48s</strong>
+            <span class="delta">Any day · any hour</span>
+          </div>
+          <div>
+            <span class="label">Cost vs. SWIFT</span>
+            <strong>−80%</strong>
+            <span class="delta up">Fees + FX spread</span>
+          </div>
+          <div>
+            <span class="label">Platform uptime</span>
+            <strong>99.99%</strong>
+            <span class="delta">Trailing 12 months</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="section" id="quote">
+      <div class="container split">
+        <div>
+          <span class="eyebrow">Transfer interface</span>
+          <h2>One Rate. <em>No Surprises.</em></h2>
+          <p class="sub">Quote, lock and send in a single step. The rate you see is the rate your recipient gets — settled on-chain, delivered in local currency.</p>
+          <hr class="gold-rule" />
+          <ul class="points">
+            <li><span class="pt">◆</span> Mid-market rate plus one disclosed spread</li>
+            <li><span class="pt">□</span> Recipients never touch crypto</li>
+            <li><span class="pt">—</span> Settlement in minutes, including weekends</li>
+            <li><span class="pt">→</span> Every transfer tracked end-to-end</li>
+          </ul>
+        </div>
+
+        <div class="quote-card" aria-label="Transfer quote calculator">
+          <div class="quote-head">
+            <span class="qc-title">Send Money</span>
+            <span class="chips"><span class="chip live">● Live</span><span class="chip">◆ Rate locked</span></span>
+          </div>
+
+          <label class="field">
+            <span class="field-label">You send</span>
+            <div class="field-row">
+              <input id="sendAmount" type="number" min="0" step="100" value="10000" inputmode="decimal" />
+              <select id="fromCur">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+              </select>
+            </div>
+          </label>
+
+          <div class="swap-icon" aria-hidden="true">⇅</div>
+
+          <label class="field">
+            <span class="field-label">Recipient gets</span>
+            <div class="field-row">
+              <input id="receiveAmount" type="text" readonly value="" />
+              <select id="toCur">
+                <option value="INR">INR</option>
+                <option value="MXN">MXN</option>
+                <option value="PHP">PHP</option>
+                <option value="NGN">NGN</option>
+                <option value="BRL">BRL</option>
+                <option value="KES">KES</option>
+              </select>
+            </div>
+          </label>
+
+          <div class="quote-rows">
+            <div><span>Rate</span><span id="rateOut">1 USD = 83.42 INR</span></div>
+            <div><span>Fee (0.25%)</span><span id="feeOut">$25.00</span></div>
+            <div><span>Arrives in</span><span class="teal" id="etaOut">~3 minutes</span></div>
+            <div><span>Saved vs. bank wire</span><span class="teal" id="saveOut">$413.00</span></div>
+          </div>
+          <a href="#contact" class="btn btn-gold btn-block"><span class="plus">+</span> Continue to transfer</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section" id="how">
+      <div class="container">
+        <span class="eyebrow">How it works</span>
+        <h2>Fiat In. <em>Fiat Out.</em></h2>
+        <p class="sub">Stablecoins sit quietly in the middle. Orrith handles the on-ramp, on-chain settlement and local payout behind a single call.</p>
+        <hr class="gold-rule" />
+
+        <div class="grid-4">
+          <div class="cell">
+            <div class="num-row"><span class="num">1</span><span class="mono-title">Fund</span></div>
+            <p>Send USD, EUR or GBP via ACH, SEPA, Faster Payments or wire to your Orrith virtual account.</p>
+          </div>
+          <div class="cell">
+            <div class="num-row"><span class="num">2</span><span class="mono-title">Mint</span></div>
+            <p>Balances convert 1:1 into USDC or EURC held with regulated issuers and segregated custodians.</p>
+          </div>
+          <div class="cell">
+            <div class="num-row"><span class="num">3</span><span class="mono-title">Settle</span></div>
+            <p>Value moves on-chain in seconds — no correspondent banks, no cut-off times, no holidays.</p>
+          </div>
+          <div class="cell">
+            <div class="num-row"><span class="num">4</span><span class="mono-title">Pay out</span></div>
+            <p>Licensed local partners deliver local currency to bank accounts or mobile wallets.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="section" id="products">
+      <div class="container">
+        <span class="eyebrow">Platform</span>
+        <h2>Built for <em>Global Finance Teams</em></h2>
+        <p class="sub">Start with a single payout or run your entire international treasury on Orrith.</p>
+        <hr class="gold-rule" />
+
+        <div class="grid-2">
+          <article class="cell">
+            <div class="glyph">◆</div>
+            <h3>Global Payouts</h3>
+            <p>Pay suppliers, contractors and sellers in 60+ currencies. Batch up to 10,000 payouts in a single request.</p>
+            <div class="tags"><span>Bulk CSV</span><span>60+ Currencies</span><span>Mobile Wallets</span></div>
+          </article>
+          <article class="cell">
+            <div class="glyph">□</div>
+            <h3>Multi-currency Accounts</h3>
+            <p>Hold balances in USD, EUR and stablecoins. Receive with local account details in 12 markets.</p>
+            <div class="tags"><span>Virtual IBANs</span><span>USDC · EURC</span><span>12 Markets</span></div>
+          </article>
+          <article class="cell">
+            <div class="glyph">—</div>
+            <h3>Treasury &amp; FX</h3>
+            <p>Lock rates up to 72 hours ahead, earn yield on idle balances, and manage exposure from one dashboard.</p>
+            <div class="tags"><span>Rate Locks</span><span>Yield</span><span>Hedging</span></div>
+          </article>
+          <article class="cell">
+            <div class="glyph">→</div>
+            <h3>Compliance Built-in</h3>
+            <p>Real-time sanctions screening, Travel Rule messaging and on-chain analytics on every single transfer.</p>
+            <div class="tags"><span>KYB / KYC</span><span>Travel Rule</span><span>Audit Trails</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">Why Orrith</span>
+        <h2>The Old Rails. <em>The New Ones.</em></h2>
+        <p class="sub">A $50,000 payment from the United States to the Philippines, compared.</p>
+        <hr class="gold-rule" />
+
+        <div class="table">
+          <div class="tr th"><span></span><span>Traditional wire</span><span class="gold">Orrith</span></div>
+          <div class="tr"><span>Total fees</span><span>$1,480</span><span class="gold">$125</span></div>
+          <div class="tr"><span>FX markup</span><span>2.5 – 4.0%</span><span class="gold">0.10%</span></div>
+          <div class="tr"><span>Time to arrive</span><span>2 – 5 business days</span><span class="gold">&lt; 10 minutes</span></div>
+          <div class="tr"><span>Weekend settlement</span><span>No</span><span class="gold">Yes</span></div>
+          <div class="tr"><span>Real-time tracking</span><span>Limited</span><span class="gold">End-to-end</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Corridors -->
+    <section class="section" id="corridors">
+      <div class="container">
+        <span class="eyebrow">Coverage</span>
+        <h2>Active <em>Corridors</em></h2>
+        <p class="sub">Local payouts in 42 countries and growing. Figures below are indicative.</p>
+        <hr class="gold-rule" />
+
+        <div class="mini-stats">
+          <div><strong>42</strong><span>Countries</span></div>
+          <div><strong>60+</strong><span>Currencies</span></div>
+          <div><strong>&lt; 4 min</strong><span>Median delivery</span></div>
+        </div>
+
+        <div class="corridors">
+          <div class="corridor"><span class="pair">USD → INR</span><span>~3 min</span><span class="gold">0.20%</span></div>
+          <div class="corridor"><span class="pair">USD → MXN</span><span>~2 min</span><span class="gold">0.18%</span></div>
+          <div class="corridor"><span class="pair">GBP → NGN</span><span>~6 min</span><span class="gold">0.35%</span></div>
+          <div class="corridor"><span class="pair">EUR → BRL</span><span>~4 min</span><span class="gold">0.25%</span></div>
+          <div class="corridor"><span class="pair">USD → PHP</span><span>~3 min</span><span class="gold">0.22%</span></div>
+          <div class="corridor"><span class="pair">EUR → KES</span><span>~5 min</span><span class="gold">0.30%</span></div>
+          <div class="corridor"><span class="pair">USD → COP</span><span>~4 min</span><span class="gold">0.24%</span></div>
+          <div class="corridor"><span class="pair">SGD → VND</span><span>~5 min</span><span class="gold">0.28%</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Developers -->
+    <section class="section" id="developers">
+      <div class="container split">
+        <div>
+          <span class="eyebrow">Developers</span>
+          <h2>Global Payouts. <em>One Afternoon.</em></h2>
+          <p class="sub">One endpoint to quote, one to pay. Sandbox keys in seconds, production in days.</p>
+          <hr class="gold-rule" />
+          <ul class="points">
+            <li><span class="pt">◆</span> Idempotent requests and signed webhooks</li>
+            <li><span class="pt">□</span> Full sandbox with simulated corridors</li>
+            <li><span class="pt">—</span> SDKs for Node, Python, Go and Java</li>
+            <li><span class="pt">→</span> 99.99% uptime SLA on Enterprise</li>
+          </ul>
+        </div>
+        <div class="code-card">
+          <div class="code-tabs"><span class="active">Node.js</span><span>Python</span><span>cURL</span></div>
+<pre><code><span class="k">import</span> Orrith <span class="k">from</span> <span class="s">'@orrith/node'</span>;
+
+<span class="k">const</span> orrith = <span class="k">new</span> Orrith(process.env.ORRITH_KEY);
+
+<span class="k">const</span> payout = <span class="k">await</span> orrith.payouts.create({
+  amount: <span class="n">25000</span>,
+  source_currency: <span class="s">'USD'</span>,
+  destination_currency: <span class="s">'MXN'</span>,
+  rail: <span class="s">'usdc'</span>,
+  beneficiary: {
+    name: <span class="s">'Taller Robles S.A.'</span>,
+    clabe: <span class="s">'002180700123456789'</span>,
+  },
+});
+
+console.log(payout.status); <span class="c">// "settled" · 94s</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <span class="eyebrow">Pricing</span>
+        <h2>Transparent <em>by Design</em></h2>
+        <p class="sub">No setup fees. No hidden FX spread. Pay only for what you send.</p>
+        <hr class="gold-rule" />
+
+        <div class="pricing">
+          <div class="plan">
+            <span class="plan-name">Starter</span>
+            <div class="price">0.50%<small>per transfer</small></div>
+            <p>For small teams sending their first international payments.</p>
+            <ul>
+              <li>Up to $250K / month</li>
+              <li>20+ payout currencies</li>
+              <li>Dashboard &amp; CSV payouts</li>
+              <li>Email support</li>
+            </ul>
+            <a href="#contact" class="btn btn-line btn-block">Start free</a>
+          </div>
+          <div class="plan featured">
+            <span class="plan-name">Growth <span class="chip">Most popular</span></span>
+            <div class="price">0.25%<small>per transfer</small></div>
+            <p>For scaling businesses with recurring global payouts.</p>
+            <ul>
+              <li>Up to $5M / month</li>
+              <li>60+ payout currencies</li>
+              <li>Full API &amp; webhooks</li>
+              <li>FX rate locks up to 24h</li>
+              <li>Priority support</li>
+            </ul>
+            <a href="#contact" class="btn btn-gold btn-block"><span class="plus">+</span> Get started</a>
+          </div>
+          <div class="plan">
+            <span class="plan-name">Enterprise</span>
+            <div class="price">Custom</div>
+            <p>For platforms and institutions moving serious volume.</p>
+            <ul>
+              <li>Unlimited volume</li>
+              <li>Dedicated liquidity &amp; rates</li>
+              <li>99.99% uptime SLA</li>
+              <li>Named account manager</li>
+            </ul>
+            <a href="#contact" class="btn btn-line btn-block">Talk to sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logos marquee -->
+    <section class="trusted">
+      <div class="container">
+        <span class="label center">Trusted by finance teams worldwide</span>
+        <p class="trusted-sub">1,200+ marketplaces, fintechs and exporters settle with Orrith</p>
+      </div>
+      <div class="marquee">
+        <div class="marquee-track">
+          <span>NORTHWIND</span><i>◆</i><span>KELPAY</span><i>◆</i><span>LUMEN &amp; CO</span><i>◆</i><span>TRADEWAY</span><i>◆</i><span>ARCFIELD</span><i>◆</i><span>MONTEO</span><i>◆</i>
+          <span>NORTHWIND</span><i>◆</i><span>KELPAY</span><i>◆</i><span>LUMEN &amp; CO</span><i>◆</i><span>TRADEWAY</span><i>◆</i><span>ARCFIELD</span><i>◆</i><span>MONTEO</span><i>◆</i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">Customers</span>
+        <h2>In Their <em>Own Words</em></h2>
+        <hr class="gold-rule" />
+        <div class="grid-3">
+          <figure class="cell">
+            <blockquote>“We pay 3,400 drivers across Latin America every week. Orrith cut our payout costs by 71% and late-payment tickets went to nearly zero.”</blockquote>
+            <figcaption><strong>Mariana Reyes</strong><span>VP Finance · Tradeway</span></figcaption>
+          </figure>
+          <figure class="cell">
+            <blockquote>“Weekend settlement was the unlock. Our suppliers in Lagos get paid on Saturday instead of waiting until Wednesday.”</blockquote>
+            <figcaption><strong>David Okafor</strong><span>COO · Kelpay</span></figcaption>
+          </figure>
+          <figure class="cell">
+            <blockquote>“We went from signing to live payouts in India and the Philippines in eleven days. The API is genuinely good.”</blockquote>
+            <figcaption><strong>Sophie Laurent</strong><span>Head of Engineering · Arcfield</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security -->
+    <section class="section">
+      <div class="container">
+        <div class="feature-box">
+          <span class="eyebrow"><span class="diamond">◆</span> Security &amp; compliance</span>
+          <h2>Built for Regulators.<br /><em>Trusted by CFOs.</em></h2>
+          <p class="sub">Every dollar in transit is backed 1:1 by cash and short-term US Treasuries held at regulated custodians. Monthly attestations, published openly.</p>
+          <div class="badges">
+            <div><strong>SOC 2</strong><span>Type II</span></div>
+            <div><strong>ISO</strong><span>27001</span></div>
+            <div><strong>MSB</strong><span>FinCEN</span></div>
+            <div><strong>EMI</strong><span>EU licensed</span></div>
+            <div><strong>MiCA</strong><span>Compliant</span></div>
+            <div><strong>PCI</strong><span>DSS L1</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container narrow">
+        <span class="eyebrow">FAQ</span>
+        <h2>Common <em>Questions</em></h2>
+        <hr class="gold-rule" />
+        <div class="faq">
+          <details>
+            <summary>Do my recipients need a crypto wallet?</summary>
+            <p>No. Recipients receive local currency directly in their bank account or mobile wallet. Stablecoins are only used as the settlement layer between countries.</p>
+          </details>
+          <details>
+            <summary>Which stablecoins does Orrith use?</summary>
+            <p>We primarily settle in USDC and EURC, both fully reserve-backed and issued by regulated entities. Enterprise customers can request additional assets.</p>
+          </details>
+          <details>
+            <summary>How is the exchange rate calculated?</summary>
+            <p>We quote the mid-market rate plus a fixed, disclosed spread. The rate you see is the rate you get — locked for the duration of your quote.</p>
+          </details>
+          <details>
+            <summary>Is my money safe while in transit?</summary>
+            <p>Customer funds are held in segregated accounts and backed 1:1. Orrith never lends customer balances, and every transfer is tracked end-to-end.</p>
+          </details>
+          <details>
+            <summary>How long does onboarding take?</summary>
+            <p>Most businesses are approved within 2 business days. Sandbox API access is instant.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="cta">
+          <h2>Money at <em>Internet Speed.</em></h2>
+          <p class="sub">Talk to our team or open an account in minutes.</p>
+          <form class="cta-form" onsubmit="event.preventDefault(); this.querySelector('button').innerHTML='Thank you — we\'ll be in touch'; this.reset();">
+            <input type="email" required placeholder="Work email" aria-label="Work email" />
+            <button class="btn btn-gold" type="submit"><span class="plus">+</span> Request access</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo"><img src="assets/favicon.svg" alt="" width="26" height="26" /><span class="logo-word">ORRITH</span></a>
+        <p>Cross-border payments on stablecoin rails.</p>
+      </div>
+      <div><h4>Products</h4><a href="#">Global Payouts</a><a href="#">Accounts</a><a href="#">Treasury &amp; FX</a><a href="#">Payments API</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Contact</a></div>
+      <div><h4>Resources</h4><a href="#">Docs</a><a href="#">API status</a><a href="#">Attestations</a><a href="#">Blog</a></div>
+      <div><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Licenses</a><a href="#">Disclosures</a></div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Orrith Technologies, Inc.</span>
+      <span>Orrith is a financial technology company, not a bank. Payment services provided by licensed partners.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
