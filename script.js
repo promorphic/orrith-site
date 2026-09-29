@@ -1,7 +1,7 @@
 // Indicative rates (placeholder numbers)
 const RATES = {
   USD: { EUR: 0.9223, INR: 83.42, MXN: 17.08, PHP: 56.21, NGN: 1542.5, BRL: 5.02, KES: 129.4 },
-  EUR: { EUR: 1, INR: 90.11, MXN: 18.45, PHP: 60.72, NGN: 1666.3, BRL: 5.42, KES: 139.8 },
+  EUR: { INR: 90.11, MXN: 18.45, PHP: 60.72, NGN: 1666.3, BRL: 5.42, KES: 139.8 },
   GBP: { EUR: 1.169, INR: 105.37, MXN: 21.57, PHP: 71.0, NGN: 1948.2, BRL: 6.34, KES: 163.4 },
 };
 const SYMBOL = { USD: '$', EUR: '€', GBP: '£' };
@@ -12,9 +12,17 @@ const BANK_COST = 0.0438; // typical wire fee + FX markup, for "you save"
 const $ = (id) => document.getElementById(id);
 const fmt = (n, d = 2) => n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
 
+// Hide the destination that matches the source currency (e.g. no EUR → EUR)
+function syncDestinations(from) {
+  const toSel = $('toCur');
+  for (const opt of toSel.options) opt.hidden = opt.disabled = opt.value === from;
+  if (toSel.value === from) toSel.value = [...toSel.options].find((o) => !o.disabled).value;
+}
+
 function updateQuote() {
   const amount = Math.max(0, parseFloat($('sendAmount').value) || 0);
   const from = $('fromCur').value;
+  syncDestinations(from);
   const to = $('toCur').value;
   const rate = RATES[from][to];
   const fee = amount * FEE;
