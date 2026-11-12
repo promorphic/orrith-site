@@ -278,7 +278,8 @@ p { margin: 0; text-wrap: pretty; }
 .world ul { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; color: rgba(255, 255, 255, .78); font-size: 16px; }
 .world li { padding-left: 18px; position: relative; }
 .world li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 1px; background: var(--wave); }
-.worlds-mid { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--navy); border: 1px solid var(--line-dark); border-radius: 999px; padding: 10px 16px; font-family: var(--head); font-weight: 600; font-size: 18px; letter-spacing: -0.02em; z-index: 2; }
+.worlds-mid { position: absolute; inset: 0; margin: auto; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; background: var(--navy); border: 1px solid var(--line-dark); border-radius: 50%; color: var(--wave); z-index: 2; box-shadow: 0 0 0 8px var(--navy); }
+.worlds-mid svg { width: 30px; height: 30px; }
 @media (max-width: 760px) { .worlds { grid-template-columns: 1fr; } .world + .world { border-left: 0; border-top: 1px solid var(--line-dark); } .worlds-mid { display: none; } }
 
 /* ── Tables / KV ────────────────────────────────────────── */
