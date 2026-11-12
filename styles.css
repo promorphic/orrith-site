@@ -376,6 +376,7 @@ p { margin: 0; text-wrap: pretty; }
 .row-pills { display: flex; flex-wrap: wrap; gap: 8px; }
 .note { border-left: 2px solid var(--wave); padding: 4px 0 4px 16px; color: var(--ink-2); font-size: 15px; }
 .dark .note { color: rgba(255, 255, 255, .75); }
+section[id], [id].section { scroll-margin-top: 72px; }
 hr.rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
 .skip { position: absolute; left: -9999px; }
 .skip:focus { left: 16px; top: 16px; z-index: 100; background: #fff; color: var(--ink); padding: 10px 14px; border-radius: 8px; }
@@ -387,3 +388,30 @@ hr.rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
   .hero-content { padding-top: 120px; padding-bottom: 56px; }
   .btn { height: 46px; }
 }
+
+/* ── Neon "live" label ─────────────────────────────────── */
+.eyebrow.neon {
+  display: inline-flex; align-items: center; gap: 10px;
+  justify-self: start; padding: 8px 14px 8px 12px; border-radius: 999px;
+  background: var(--navy); border: 1px solid rgba(57, 255, 138, .35);
+  box-shadow: 0 0 0 1px rgba(57, 255, 138, .08), 0 0 18px rgba(57, 255, 138, .25), inset 0 0 12px rgba(57, 255, 138, .12);
+  color: #39ff8a;
+  text-shadow: 0 0 4px rgba(57, 255, 138, .9), 0 0 12px rgba(57, 255, 138, .7), 0 0 28px rgba(57, 255, 138, .45);
+  animation: neon-flicker 3.2s ease-in-out infinite;
+}
+.eyebrow.neon::before {
+  content: ""; width: 9px; height: 9px; border-radius: 50%; background: #39ff8a;
+  box-shadow: 0 0 6px #39ff8a, 0 0 14px #39ff8a, 0 0 26px rgba(57, 255, 138, .6);
+  animation: pulse-neon 1.8s ease-in-out infinite;
+}
+@keyframes neon-flicker {
+  0%, 100% { text-shadow: 0 0 4px rgba(57, 255, 138, .9), 0 0 12px rgba(57, 255, 138, .7), 0 0 28px rgba(57, 255, 138, .45); }
+  50% { text-shadow: 0 0 6px rgba(57, 255, 138, 1), 0 0 18px rgba(57, 255, 138, .85), 0 0 40px rgba(57, 255, 138, .6); }
+}
+@keyframes pulse-neon {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25); opacity: .75; }
+}
+.voyage-strip .tag.neon { color: #39ff8a; text-shadow: 0 0 6px rgba(57, 255, 138, .8), 0 0 16px rgba(57, 255, 138, .5); }
+.voyage-strip .tag.neon .dot { background: #39ff8a; box-shadow: 0 0 6px #39ff8a, 0 0 14px #39ff8a; }
+@media (prefers-reduced-motion: reduce) { .eyebrow.neon, .eyebrow.neon::before { animation: none; } }

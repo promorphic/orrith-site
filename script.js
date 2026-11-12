@@ -9,6 +9,8 @@
   }
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('load', onScroll);
+  window.addEventListener('hashchange', onScroll);
 
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
